@@ -14,17 +14,17 @@ from .commands import command_groups
 from .db import db
 from .security import cors, jwt
 from .views import api_bp
+from .config import get_config
 
 __version__ = "0.0.1"
 __title__ = "Lens Gallery API"
 
 
-def create_app(env=None):
+def create_app(env: str = "development"):
     app = Flask(__name__, static_folder=None)
-    if env:
-        app.config["ENV"] = env
-    app.config.from_object("core.default_settings")
-    app.config.from_envvar("APP_SETTINGS")
+    app.config["ENV"] = env
+    app.config.from_object(get_config(env))
+    app.config.from_envvar("APP_SETTINGS", silent=must_silent_envvar(env))
 
     api_spec = APISpec(
         title=__title__,
@@ -43,6 +43,10 @@ def create_app(env=None):
     register_logger(app)
 
     return app
+
+
+def must_silent_envvar(env: str):
+    return env != "production"
 
 
 def register_extensions(app: Flask):

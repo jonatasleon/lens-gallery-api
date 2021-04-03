@@ -1,5 +1,4 @@
 import json
-import os
 
 import pytest
 from flask.app import Flask
@@ -10,10 +9,7 @@ from core.models.user import UserModel
 
 @pytest.fixture
 def app() -> Flask:
-    os.environ["APP_SETTINGS"] = "../settings.cfg"
     app = core.create_app("test")
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite://"
-    app.config["TESTING"] = True
     return app
 
 
