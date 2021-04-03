@@ -1,0 +1,6 @@
+-r requirements.txt
+flask-shell-ipython==0.4.1
+ipdb==0.13.7
+ipython==7.21.0
+pytest==6.2.2
+python-dotenv==0.15.0
