@@ -1,3 +1,6 @@
+from functools import wraps
+
+
 def unpack(value):
     """Return a three tuple of data, code, and headers"""
     if not isinstance(value, tuple):
@@ -18,4 +21,12 @@ def unpack(value):
     return value, 200, {}
 
 
-parse_args = lambda schema: lambda fn: lambda **kwargs: fn(schema().load(kwargs))
+def parse_args_with_schema(schema):
+    def decorator(fn):
+        @wraps(fn)
+        def wrapper(**kwargs):
+            return fn(schema().load(kwargs))
+
+        return wrapper
+
+    return decorator

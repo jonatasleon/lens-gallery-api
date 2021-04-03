@@ -14,6 +14,7 @@ cors = CORS(
     }
 )
 
+
 # Register a callback function that takes whatever object is passed in as the
 # identity when creating JWTs and converts it to a JSON serializable format.
 @jwt.user_identity_loader
