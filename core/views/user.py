@@ -10,7 +10,7 @@ from core.services import UserService
 
 class BaseUserView(SwaggerView):
     service = UserService
-    decorators = [ jwt_required(optional=True) ]
+    decorators = [jwt_required(optional=True)]
     tags = ["users"]
     definitions = {
         "UserSchema": UserSchema,

@@ -51,9 +51,8 @@ def auth_header(access_token):
 
 class TestUser:
     path = "/api/users"
-    def test_when_make_a_post_with_a_correct_user_object_return_201_as_status_code(
-        self, client
-    ):
+
+    def test_when_make_a_post_with_a_correct_user_object_return_201_as_status_code(self, client):
         rv = client.post(
             self.path,
             data=json.dumps(
@@ -68,9 +67,7 @@ class TestUser:
 
         assert 201 == rv.status_code
 
-    def test_when_make_a_post_with_an_incomplete_but_valid_user_object_return_201_as_status_code(
-        self, client
-    ):
+    def test_when_make_a_post_with_an_incomplete_but_valid_user_object_return_201_as_status_code(self, client):
         rv = client.post(
             self.path,
             data=json.dumps(
@@ -84,9 +81,7 @@ class TestUser:
 
         assert 201 == rv.status_code
 
-    def test_when_make_a_post_to_users_without_password_return_422_as_status_code(
-        self, client
-    ):
+    def test_when_make_a_post_to_users_without_password_return_422_as_status_code(self, client):
         rv = client.post(
             self.path,
             data=json.dumps(
@@ -114,9 +109,7 @@ class TestUser:
 
         assert 422 == rv.status_code
 
-    def test_when_make_a_post_with_a_correct_user_object_return_a_valid_user_representation(
-        self, client
-    ):
+    def test_when_make_a_post_with_a_correct_user_object_return_a_valid_user_representation(self, client):
         rv = client.post(
             self.path,
             data=json.dumps(
@@ -132,9 +125,7 @@ class TestUser:
         assert dict(data, email="another@client.com", name="Tester") == data
         assert "id" in data
 
-    def test_when_try_get_user_data_with_no_credentials_return_401_status_code(
-        self, client
-    ):
+    def test_when_try_get_user_data_with_no_credentials_return_401_status_code(self, client):
         rv = client.get(self.path)
         assert 401 == rv.status_code
 
@@ -142,9 +133,7 @@ class TestUser:
 class TestLogin:
     path = "/api/login"
 
-    def test_when_try_login_with_correct_credentials_return_200_as_status_code(
-        self, client
-    ):
+    def test_when_try_login_with_correct_credentials_return_200_as_status_code(self, client):
         rv = client.post(
             self.path,
             data=json.dumps(
@@ -157,9 +146,7 @@ class TestLogin:
         )
         assert 200 == rv.status_code
 
-    def test_when_try_login_with_correct_credentials_return_access_token_in_body(
-        self, client
-    ):
+    def test_when_try_login_with_correct_credentials_return_access_token_in_body(self, client):
         rv = client.post(
             self.path,
             data=json.dumps(
@@ -173,9 +160,7 @@ class TestLogin:
         data = json.loads(rv.data.decode())
         assert "access_token" in data
 
-    def test_when_try_login_with_incorrect_password_return_401_as_status_code(
-        self, client
-    ):
+    def test_when_try_login_with_incorrect_password_return_401_as_status_code(self, client):
         rv = client.post(
             self.path,
             data=json.dumps(
@@ -188,9 +173,7 @@ class TestLogin:
         )
         assert 401 == rv.status_code
 
-    def test_when_try_login_with_incorrect_email_return_401_as_status_code(
-        self, client
-    ):
+    def test_when_try_login_with_incorrect_email_return_401_as_status_code(self, client):
         rv = client.post(
             self.path,
             data=json.dumps(
@@ -220,9 +203,7 @@ class TestLogin:
 class TestPhoto:
     path = "/api/photos"
 
-    def test_when_make_a_post_with_a_correct_photo_object_return_201_as_status_code(
-        self, client, auth_header
-    ):
+    def test_when_make_a_post_with_a_correct_photo_object_return_201_as_status_code(self, client, auth_header):
         rv = client.post(
             self.path,
             data=json.dumps(

@@ -32,11 +32,7 @@ def create_app(env=None):
         openapi_version="2.0",
         plugins=[
             FlaskPlugin(),
-            MarshmallowPlugin(
-                schema_name_resolver=lambda schema: schema.__name__.replace(
-                    "Schema", ""
-                )
-            ),
+            MarshmallowPlugin(schema_name_resolver=lambda schema: schema.__name__.replace("Schema", "")),
         ],
     )
 
@@ -75,11 +71,7 @@ def register_commands(app: Flask):
 def register_logger(app):
     if not app.debug:
         # https://docs.python.org/3.6/library/logging.handlers.html#timedrotatingfilehandler
-        file_handler = TimedRotatingFileHandler(
-            os.path.join(app.config["LOG_DIR"], "core.log"), "midnight"
-        )
+        file_handler = TimedRotatingFileHandler(os.path.join(app.config["LOG_DIR"], "core.log"), "midnight")
         file_handler.setLevel(logging.WARNING)
-        file_handler.setFormatter(
-            logging.Formatter("<%(asctime)s> <%(levelname)s> %(message)s")
-        )
+        file_handler.setFormatter(logging.Formatter("<%(asctime)s> <%(levelname)s> %(message)s"))
         app.logger.addHandler(file_handler)

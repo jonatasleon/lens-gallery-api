@@ -10,7 +10,7 @@ from core.services import PhotoService
 
 class BasePhotoView(SwaggerView):
     service = PhotoService
-    decorators = [ jwt_required() ]
+    decorators = [jwt_required()]
     tags = ["photos"]
     definitions = {
         "PhotoSchema": PhotoSchema,

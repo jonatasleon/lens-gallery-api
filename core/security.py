@@ -23,5 +23,5 @@ def user_identity_callback(user: UserModel) -> int:
 
 @jwt.user_lookup_loader
 def user_lookup_callback(_, jwt_data) -> UserModel:
-    identity = jwt_data['sub']
+    identity = jwt_data["sub"]
     return UserService.get_by_id(identity)

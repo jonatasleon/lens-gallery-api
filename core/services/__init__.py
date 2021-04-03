@@ -9,6 +9,7 @@ from core.models import PhotoModel, UserModel
 
 T = typing.TypeVar("T")
 
+
 class Service(typing.Generic[T]):
     __session__ = db.session
     __model__: T
@@ -32,8 +33,7 @@ class LoginService(Service):
     @classmethod
     def check_credentials(cls, credentials) -> bool:
         try:
-            return cls.get_one(email=credentials.email) \
-                      .check_password(credentials.password)
+            return cls.get_one(email=credentials.email).check_password(credentials.password)
         except NoResultFound:
             return False
 
