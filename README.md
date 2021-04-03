@@ -1,6 +1,6 @@
-# api
+# Lens Gallery
 
-api description
+Experimental API using Open API and good intentions.
 
 ## Quick Start
 
