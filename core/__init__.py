@@ -24,7 +24,6 @@ def create_app(env: str = "development"):
     app = Flask(__name__, static_folder=None)
     app.config["ENV"] = env
     app.config.from_object(get_config(env))
-    app.config.from_envvar("APP_SETTINGS", silent=must_silent_envvar(env))
 
     api_spec = APISpec(
         title=__title__,
@@ -43,10 +42,6 @@ def create_app(env: str = "development"):
     register_logger(app)
 
     return app
-
-
-def must_silent_envvar(env: str):
-    return env != "production"
 
 
 def register_extensions(app: Flask):

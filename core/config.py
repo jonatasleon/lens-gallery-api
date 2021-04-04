@@ -3,16 +3,18 @@ import os
 
 class Config:
     DEBUG = False
+    TESTING = False
     JWT_ERROR_MESSAGE_KEY = "message"
     JWT_SECRET_KEY = "super-secret"
     LOG_DIR = "."
-    SQLALCHEMY_DATABASE_URI = os.environ.get("SQLALCHEMY_DATABASE_URI", None)
+    SQLALCHEMY_DATABASE_URI = "sqlite://"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    TESTING = False
 
 
 class ProductionConfig(Config):
-    ...
+    JWT_SECRET_KEY = os.environ.get("JWT_SECRET_KEY")
+    LOG_DIR = os.environ.get("LOG_DIR")
+    SQLALCHEMY_DATABASE_URI = os.environ.get("SQLALCHEMY_DATABASE_URI")
 
 
 class DevelopmentConfig(Config):
